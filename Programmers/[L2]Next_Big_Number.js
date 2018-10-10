@@ -1,9 +1,30 @@
 function solution(n) {
-    var answer = 0;
-    return answer;
+    const numStr = n.toString(2); 
+    const numArr = numStr.split('');
+    const numOfOne = numStr.match(/1/g).length; 
+    const firstZeroBeforeOneIdx = (numStr.match(/01/)) ? numStr.match(/01/).index : -1;
+    
+    if (firstZeroBeforeOneIdx < 0) { 
+        if (numOfOne === numStr.length) {
+            return parseInt( '10' + numStr.slice(1) , 2)
+        } else {
+            return parseInt( '1' + '0'.repeat(numStr.length - (numOfOne-1)) + '1'.repeat(numOfOne-1) , 2)
+        }
+    }
+    
+    const newNumStr = numStr.slice(0, firstZeroBeforeOneIdx) +
+                     '1' + 
+                     '0'.repeat(numStr.length-(firstZeroBeforeOneIdx+1)-(numOfOne-2))  +
+                     '1'.repeat(numOfOne-2);
+ 
+    return parseInt(newNumStr, 2)
 }
 
 
+console.log('78' , solution(78) === 83);
+console.log('15', solution(15) === 23);
+
+console.log('6', solution(6) === 9);
 
 // 자연수 n이 주어졌을 때, n의 다음 큰 숫자는 다음과 같이 정의 합니다.
 
