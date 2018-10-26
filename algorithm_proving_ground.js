@@ -17,14 +17,17 @@ n은 500,000,000이하의 자연수 입니다.
 
 function solution(n, acc = '') {
   const candidates = [4,1,2];
+  const candidatesFor3Multiples = [2,4,1];
   const lastDigit = candidates[n % 3];
   const upperDigits = Math.floor(n / 3);
-  acc += lastDigit;
+  acc = lastDigit + acc;
   
   if (n <= 3) return acc
-  if (upperDigits <= 3) return candidates[upperDigits % 3] + acc
+  if (upperDigits <= 3) {
+    return (n%3) ? candidates[upperDigits % 3] + acc : candidatesFor3Multiples[upperDigits % 3] + acc 
+  }
   
-  return solution(upperDigits, acc);
+  return (n%3) ? solution(upperDigits, acc) : solution(upperDigits -1 , acc)
 }
 
 
@@ -32,15 +35,40 @@ const testModule = require('./Programmers_testing_template');
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
 
+
+tester('한 자리 수 3', new TestScenario({
+  'givenArr': [3],
+  'whenFn': solution,
+  'thenVal': '4',
+  'assertionFn': (expectedResult, actualResult) => expectedResult === actualResult,
+}))
+tester('한 자리 수 6', new TestScenario({
+  'givenArr': [6],
+  'whenFn': solution,
+  'thenVal': '14',
+  'assertionFn': (expectedResult, actualResult) => expectedResult === actualResult,
+}))
+tester('한 자리 수 8', new TestScenario({
+  'givenArr': [8],
+  'whenFn': solution,
+  'thenVal': '22',
+  'assertionFn': (expectedResult, actualResult) => expectedResult === actualResult,
+}))
 tester('한 자리 수 9', new TestScenario({
   'givenArr': [9],
   'whenFn': solution,
   'thenVal': '24',
   'assertionFn': (expectedResult, actualResult) => expectedResult === actualResult,
 }))
-tester('한 자리 수 3', new TestScenario({
-  'givenArr': [3],
+tester('두 자리 수 26', new TestScenario({
+  'givenArr': [26],
   'whenFn': solution,
-  'thenVal': '4',
+  'thenVal': '222',
+  'assertionFn': (expectedResult, actualResult) => expectedResult === actualResult,
+}))
+tester('두 자리 수 27', new TestScenario({
+  'givenArr': [27],
+  'whenFn': solution,
+  'thenVal': '224',
   'assertionFn': (expectedResult, actualResult) => expectedResult === actualResult,
 }))
