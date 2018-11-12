@@ -2,6 +2,7 @@
 
 /* ====== Import belof lines on playground ======
 
+// ====== 테스트 코드 ======
 const testModule = require('./Programmers_testing_template');
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
@@ -12,6 +13,7 @@ tester('한 자리 수', new TestScenario({
   'thenVal': 4,
   'assertionFn': (expectedResult, actualResult) => expectedResult === actualResult,
 }))
+
 =======*/
 class TestScenario {
     constructor({givenArr, whenFn, thenVal, assertionFn}) {
