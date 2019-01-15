@@ -1,53 +1,23 @@
 /*
-스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다.
+https://programmers.co.kr/learn/courses/30/lessons/42747?language=javascript
 
-예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면
-다음날은 청바지를 추가로 입거나 동그란 안경 대신 검정 선글라스를 착용하거나 해야 합니다.
+H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다.
 
-종류	이름
-얼굴	동그란 안경, 검정 선글라스
-상의	파란색 티셔츠
-하의	청바지
-겉옷	긴 코트
-
-
-스파이가 가진 의상들이 담긴 2차원 배열 clothes가 주어질 때 서로 다른 옷의 조합의 수를 return 하도록 solution 함수를 작성해주세요.
+어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다.
+위키백과에 따르면, H-Index는 다음과 같이 구합니다.
+어떤 과학자가 발표한 논문 n편 중, h번 이상 인용된 논문이 h편 이상이고
+나머지 논문이 h번 이하 인용되었다면 h가 이 과학자의 H-Index입니다.
+어떤 과학자가 발표한 논문의 인용 횟수를 담은 배열 citations가 매개변수로 주어질 때,
+이 과학자의 H-Index를 return 하도록 solution 함수를 작성해주세요.
 
 [제한사항]
-clothes의 각 행은 [의상의 이름, 의상의 종류]로 이루어져 있습니다.
-스파이가 가진 의상의 수는 1개 이상 30개 이하입니다.
-같은 이름을 가진 의상은 존재하지 않습니다.
-clothes의 모든 원소는 문자열로 이루어져 있습니다.
-모든 문자열의 길이는 1 이상 20 이하인 자연수이고 알파벳 소문자 또는 '_' 로만 이루어져 있습니다.
-스파이는 하루에 최소 한 개의 의상은 입습니다.
+과학자가 발표한 논문의 수는 1편 이상 1,000편 이하입니다.
+논문별 인용 횟수는 0회 이상 10,000회 이하입니다.
 
 */
 
 function solution(dataArr) {
-  // reduce arr into object
-  const obj = dataArr.reduce((acc, [_, type]) => {
-    if (!acc[type]) {
-      acc[type] = 2;
-    } else {
-      acc[type] += 1;
-    }
-    return acc;
-  }, {});
-
-  // create array of item amouts using object using its key
-  const numOfItems = Object.keys(obj).reduce((acc, key) => {
-    acc.push(obj[key]);
-    return acc;
-  }, []);
-
-  // reduce array to pull out possible combinations
-  const combinations = (() => {
-    if (numOfItems.length === 1) return numOfItems[0];
-    return numOfItems.reduce((acc, num) => acc * num);
-  })();
-
-  // return combinations - 1 to remove the case without no camouflage
-  return combinations - 1;
+  return dataArr;
 }
 
 // ====== 테스트 코드 ======
@@ -56,23 +26,14 @@ const testModule = require('./Programmers_testing_template');
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
 
+const case1 = [3, 0, 6, 1, 5];
+const expected1 = 3;
 tester(
-  '테스트 1 - [[yellow_hat, headgear], [blue_sunglasses, eyewear], [green_turban, headgear]]',
+  `테스트 1 - ${case1}`,
   new TestScenario({
-    givenArr: [
-      [['yellow_hat', 'headgear'], ['blue_sunglasses', 'eyewear'], ['green_turban', 'headgear']],
-    ],
+    givenArr: [case1],
     whenFn: solution,
-    thenVal: 5,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-tester(
-  '테스트 2  - [[crow_mask, face], [blue_sunglasses, face], [smoky_makeup, face]]',
-  new TestScenario({
-    givenArr: [[['crow_mask', 'face'], ['blue_sunglasses', 'face'], ['smoky_makeup', 'face']]],
-    whenFn: solution,
-    thenVal: 3,
+    thenVal: expected1,
     assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
   }),
 );
