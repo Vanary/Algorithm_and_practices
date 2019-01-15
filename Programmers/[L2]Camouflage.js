@@ -1,4 +1,6 @@
 /*
+https://programmers.co.kr/learn/courses/30/lessons/42578?language=javascript
+
 스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다.
 
 예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면
@@ -50,29 +52,10 @@ function solution(dataArr) {
   return combinations - 1;
 }
 
-// ====== 테스트 코드 ======
-const testModule = require('./Programmers_testing_template');
+const answer = solution([
+  ['yellow_hat', 'headgear'],
+  ['blue_sunglasses', 'eyewear'],
+  ['green_turban', 'headgear'],
+]);
 
-const tester = testModule.fn_test;
-const TestScenario = testModule.Class_TestScenario;
-
-tester(
-  '테스트 1 - [[yellow_hat, headgear], [blue_sunglasses, eyewear], [green_turban, headgear]]',
-  new TestScenario({
-    givenArr: [
-      [['yellow_hat', 'headgear'], ['blue_sunglasses', 'eyewear'], ['green_turban', 'headgear']],
-    ],
-    whenFn: solution,
-    thenVal: 5,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-tester(
-  '테스트 2  - [[crow_mask, face], [blue_sunglasses, face], [smoky_makeup, face]]',
-  new TestScenario({
-    givenArr: [[['crow_mask', 'face'], ['blue_sunglasses', 'face'], ['smoky_makeup', 'face']]],
-    whenFn: solution,
-    thenVal: 3,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
+console.log(`Expected answer is 5, solution returned ${answer}`);
