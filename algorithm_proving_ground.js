@@ -17,7 +17,18 @@ H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다.
 */
 
 function solution(dataArr) {
-  return dataArr;
+  let hIndex = 0;
+
+  dataArr
+    .sort((a, b) => b - a) // 논문을 인용수가 큰 순서로 정렬하고
+    .forEach((refNum, idx) => {
+      // 앞서 h-index가 기록되었다면 더 작은 인용수는 고려 안함
+      if (hIndex > idx + 1) return;
+      // h번째로 큰 논문이 h회 이상 인용되었다면 h-index 기록
+      if (refNum >= idx + 1) hIndex = idx + 1;
+    });
+
+  return hIndex;
 }
 
 // ====== 테스트 코드 ======
@@ -26,14 +37,119 @@ const testModule = require('./Programmers_testing_template');
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
 
-const case1 = [3, 0, 6, 1, 5];
-const expected1 = 3;
+let testCase = [3, 0, 6, 1, 5];
+let expected = 3;
 tester(
-  `테스트 1 - ${case1}`,
+  `테스트 1 - ${testCase} should return ${expected}`,
   new TestScenario({
-    givenArr: [case1],
+    givenArr: [testCase],
     whenFn: solution,
-    thenVal: expected1,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+testCase = [0, 0, 0, 1];
+expected = 1;
+tester(
+  `테스트 2 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+testCase = [0, 0, 0];
+expected = 0;
+tester(
+  `테스트 3 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+testCase = [0];
+expected = 0;
+tester(
+  `테스트 4 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+
+testCase = [3, 3];
+expected = 2;
+tester(
+  `테스트 4 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+
+testCase = [4, 5, 6];
+expected = 3;
+tester(
+  `테스트 4 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+
+testCase = [1000];
+expected = 1;
+tester(
+  `테스트 4 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+
+testCase = [1, 1, 4, 4, 5, 5];
+expected = 4;
+tester(
+  `테스트 4 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+
+testCase = [1, 1, 4, 4, 10000, 10000];
+expected = 4;
+tester(
+  `테스트 4 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+
+testCase = [4, 4, 4, 4, 5, 5, 5, 5, 5];
+expected = 5;
+tester(
+  `테스트 4 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
     assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
   }),
 );
