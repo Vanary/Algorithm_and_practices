@@ -1,34 +1,50 @@
 /*
-https://programmers.co.kr/learn/courses/30/lessons/42747?language=javascript
+https://programmers.co.kr/learn/courses/30/lessons/42746?language=javascript
 
-H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다.
+[문제 설명]
 
-어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다.
-위키백과에 따르면, H-Index는 다음과 같이 구합니다.
-어떤 과학자가 발표한 논문 n편 중, h번 이상 인용된 논문이 h편 이상이고
-나머지 논문이 h번 이하 인용되었다면 h가 이 과학자의 H-Index입니다.
-어떤 과학자가 발표한 논문의 인용 횟수를 담은 배열 citations가 매개변수로 주어질 때,
-이 과학자의 H-Index를 return 하도록 solution 함수를 작성해주세요.
+0 또는 양의 정수가 주어졌을 때, 정수를 이어 붙여 만들 수 있는 가장 큰 수를 알아내 주세요.
+예를 들어, 주어진 정수가 [6, 10, 2]라면 [6102, 6210, 1062, 1026, 2610, 2106]를 만들 수 있고, 이중 가장 큰 수는 6210입니다.
+0 또는 양의 정수가 담긴 배열 numbers가 매개변수로 주어질 때,
+순서를 재배치하여 만들 수 있는 가장 큰 수를 문자열로 바꾸어 return 하도록 solution 함수를 작성해주세요.
 
-[제한사항]
-과학자가 발표한 논문의 수는 1편 이상 1,000편 이하입니다.
-논문별 인용 횟수는 0회 이상 10,000회 이하입니다.
+[제한 사항]
+numbers의 길이는 1 이상 100,000 이하입니다.
+numbers의 원소는 0 이상 1,000 이하입니다.
+정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.
 
+
+[풀이 후기]
+두 가지 주의사항이 있었습니다.
+- O(N^2)로 구현하면 시간 초과가 나서, 루프 속 루프를 꺼내서 루프 한 번, 그 다음에 자료를 가지고 정렬을 수행하는 방식으로 O(NlogN) 복잡도로 개선해야 했습니다.
+- 모든 입력값이 0인 케이스를 고려해야 했습니다.
 */
 
-function solution(dataArr) {
-  let hIndex = 0;
+function solution(numbersArr) {
+  const nums = [];
+  for (let i = 0; i < 10; i += 1) {
+    nums.push([]);
+  }
 
-  dataArr
-    .sort((a, b) => b - a) // 논문을 인용수가 큰 순서로 정렬하고
-    .forEach((refNum, idx) => {
-      // 앞서 h-index가 기록되었다면 더 작은 인용수는 고려 안함
-      if (hIndex > idx + 1) return;
-      // h번째로 큰 논문이 h회 이상 인용되었다면 h-index 기록
-      if (refNum >= idx + 1) hIndex = idx + 1;
-    });
+  numbersArr.forEach((num) => {
+    const numStr = num.toString();
+    const numGroup = nums[numStr[0]];
 
-  return hIndex;
+    numGroup.push(numStr);
+  });
+
+  function sortFn(numStr1, numStr2) {
+    const firstFirst = parseInt(`${numStr1}${numStr2}`, 10);
+    const firstLast = parseInt(`${numStr2}${numStr1}`, 10);
+
+    return firstFirst >= firstLast ? -1 : 1;
+  }
+
+  const result = nums
+    .map(numGroup => numGroup.sort(sortFn))
+    .reduce((acc, numGroup) => `${numGroup.join('')}${acc}`, '');
+
+  return result[0] === '0' ? '0' : result;
 }
 
 // ====== 테스트 코드 ======
@@ -37,10 +53,10 @@ const testModule = require('./Programmers_testing_template');
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
 
-let testCase = [3, 0, 6, 1, 5];
-let expected = 3;
+let testCase = [6, 10, 2];
+let expected = '6210';
 tester(
-  `테스트 1 - ${testCase} should return ${expected}`,
+  `테스트 - ${testCase} should return ${expected}`,
   new TestScenario({
     givenArr: [testCase],
     whenFn: solution,
@@ -48,10 +64,56 @@ tester(
     assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
   }),
 );
-testCase = [0, 0, 0, 1];
-expected = 1;
+testCase = [3, 30, 34];
+expected = '34330';
 tester(
-  `테스트 2 - ${testCase} should return ${expected}`,
+  `테스트 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+testCase = [3, 30, 34, 5, 9];
+expected = '9534330';
+tester(
+  `테스트 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+
+testCase = [621, 62, 627];
+expected = '62762621';
+tester(
+  `테스트 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+testCase = [621, 6, 627];
+expected = '6627621';
+tester(
+  `테스트 - ${testCase} should return ${expected}`,
+  new TestScenario({
+    givenArr: [testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+
+testCase = [0, 0, 24, 5, 69, 702];
+expected = '7026952400';
+tester(
+  `테스트 - ${testCase} should return ${expected}`,
   new TestScenario({
     givenArr: [testCase],
     whenFn: solution,
@@ -60,92 +122,9 @@ tester(
   }),
 );
 testCase = [0, 0, 0];
-expected = 0;
+expected = '0';
 tester(
-  `테스트 3 - ${testCase} should return ${expected}`,
-  new TestScenario({
-    givenArr: [testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-testCase = [0];
-expected = 0;
-tester(
-  `테스트 4 - ${testCase} should return ${expected}`,
-  new TestScenario({
-    givenArr: [testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-
-testCase = [3, 3];
-expected = 2;
-tester(
-  `테스트 4 - ${testCase} should return ${expected}`,
-  new TestScenario({
-    givenArr: [testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-
-testCase = [4, 5, 6];
-expected = 3;
-tester(
-  `테스트 4 - ${testCase} should return ${expected}`,
-  new TestScenario({
-    givenArr: [testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-
-testCase = [1000];
-expected = 1;
-tester(
-  `테스트 4 - ${testCase} should return ${expected}`,
-  new TestScenario({
-    givenArr: [testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-
-testCase = [1, 1, 4, 4, 5, 5];
-expected = 4;
-tester(
-  `테스트 4 - ${testCase} should return ${expected}`,
-  new TestScenario({
-    givenArr: [testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-
-testCase = [1, 1, 4, 4, 10000, 10000];
-expected = 4;
-tester(
-  `테스트 4 - ${testCase} should return ${expected}`,
-  new TestScenario({
-    givenArr: [testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-
-testCase = [4, 4, 4, 4, 5, 5, 5, 5, 5];
-expected = 5;
-tester(
-  `테스트 4 - ${testCase} should return ${expected}`,
+  `테스트 - ${testCase} should return ${expected}`,
   new TestScenario({
     givenArr: [testCase],
     whenFn: solution,
