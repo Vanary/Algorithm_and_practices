@@ -48,42 +48,9 @@ function solution(brown, red) {
   return [width, height];
 }
 
-// ====== 테스트 코드 ======
-const testModule = require('./Programmers_testing_template');
-
-const tester = testModule.fn_test;
-const TestScenario = testModule.Class_TestScenario;
-
-testCase = [10, 2];
-expected = [4, 3];
-tester(
-  `테스트 - ${[...testCase]} should return ${expected}`,
-  new TestScenario({
-    givenArr: [...testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult.toString() === actualResult.toString(),
-  }),
-);
-testCase = [8, 1];
-expected = [3, 3];
-tester(
-  `테스트 - ${[...testCase]} should return ${expected}`,
-  new TestScenario({
-    givenArr: [...testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult.toString() === actualResult.toString(),
-  }),
-);
-testCase = [24, 24];
-expected = [8, 6];
-tester(
-  `테스트 - ${[...testCase]} should return ${expected}`,
-  new TestScenario({
-    givenArr: [...testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult.toString() === actualResult.toString(),
-  }),
+const args = [10, 2];
+const expected = [4, 3];
+console.log(
+  `입력값 ${args}에 대한 solution의 답은 ${expected}이어야 합니다.
+  - 실제 반환값 : ${solution(...args)}`,
 );
