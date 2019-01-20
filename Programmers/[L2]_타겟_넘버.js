@@ -39,20 +39,7 @@ function solution(numbers, target) {
   return allCases.filter(finalNum => finalNum === target).length;
 }
 
-// ====== 테스트 코드 ======
-const testModule = require('./Programmers_testing_template');
-
-const tester = testModule.fn_test;
-const TestScenario = testModule.Class_TestScenario;
-
-testCase = [[1, 1, 1, 1, 1], 3];
-expected = 5;
-tester(
-  `테스트 - ${[...testCase]} should return ${expected}`,
-  new TestScenario({
-    givenArr: [...testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
+const args = [[1, 1, 1, 1, 1], 3];
+console.log(
+  `입력값 ${args}에 대한 solution의 답은 5이어야 합니다. - 실제 반환값 : ${solution(...args)}`,
 );
