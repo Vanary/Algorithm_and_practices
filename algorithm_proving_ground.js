@@ -1,47 +1,50 @@
 /*
-https://programmers.co.kr/learn/courses/30/lessons/1845?language=javascript
+https://programmers.co.kr/learn/courses/30/lessons/42841?language=javascript
 
-[L2]_폰켓몬.js
+[L2]_숫자_야구.js
 
 [문제 설명]
 
-당신은 폰켓몬을 잡기 위한 오랜 여행 끝에, 홍 박사님의 연구실에 도착했습니다. 
-홍 박사님은 당신에게 자신의 연구실에 있는 총 N 마리의 폰켓몬 중에서 N/2마리를 가져가도 좋다고 했습니다.
+숫자 야구 게임이란 2명이 서로가 생각한 숫자를 맞추는 게임입니다. 
+각자 서로 다른 1~9까지 3자리 임의의 숫자를 정한 뒤 서로에게 3자리의 숫자를 불러서 결과를 확인합니다. 
+그리고 그 결과를 토대로 상대가 정한 숫자를 예상한 뒤 맞힙니다.
+* 숫자는 맞지만, 위치가 틀렸을 때는 볼
+* 숫자와 위치가 모두 맞을 때는 스트라이크
+* 숫자와 위치가 모두 틀렸을 때는 아웃
 
-홍 박사님 연구실의 폰켓몬은 종류에 따라 번호를 붙여 구분합니다. 
-따라서 같은 종류의 폰켓몬은 같은 번호를 가지고 있습니다. 
+예를 들어, 아래의 경우가 있으면
+A : 123
+B : 1스트라이크 1볼.
+A : 356
+B : 1스트라이크 0볼.
+A : 327
+B : 2스트라이크 0볼.
+A : 489
+B : 0스트라이크 1볼.
 
-예를 들어 연구실에 총 4마리의 폰켓몬이 있고, 각 폰켓몬의 종류 번호가 [3번, 1번, 2번, 3번]이라면 
-이는 3번 폰켓몬 두 마리, 1번 폰켓몬 한 마리, 2번 폰켓몬 한 마리가 있음을 나타냅니다. 
-이때, 4마리의 폰켓몬 중 2마리를 고르는 방법은 다음과 같이 6가지가 있습니다.
+이때 가능한 답은 324와 328 두 가지입니다.
 
-첫 번째(3번), 두 번째(1번) 폰켓몬을 선택
-첫 번째(3번), 세 번째(2번) 폰켓몬을 선택
-첫 번째(3번), 네 번째(3번) 폰켓몬을 선택
-두 번째(1번), 세 번째(2번) 폰켓몬을 선택
-두 번째(1번), 네 번째(3번) 폰켓몬을 선택
-세 번째(2번), 네 번째(3번) 폰켓몬을 선택
-
-이때, 첫 번째(3번) 폰켓몬과 네 번째(3번) 폰켓몬을 선택하는 방법은 한 종류(3번 폰켓몬 두 마리)의 
-폰켓몬만 가질 수 있지만, 다른 방법들은 모두 두 종류의 폰켓몬을 가질 수 있습니다. 
-
-따라서 위 예시에서 가질 수 있는 폰켓몬 종류 수의 최댓값은 2가 됩니다.
-당신은 최대한 다양한 종류의 폰켓몬을 가지길 원하기 때문에, 
-최대한 많은 종류의 폰켓몬을 포함해서 N/2마리를 선택하려 합니다. 
-
-N마리 폰켓몬의 종류 번호가 담긴 배열 nums가 매개변수로 주어질 때, N/2마리의 폰켓몬을 선택하는 방법 중, 
-가장 많은 종류의 폰켓몬을 선택하는 방법을 찾아, 
-그때의 폰켓몬 종류 번호의 개수를 return 하도록 solution 함수를 완성해주세요.
+질문한 세 자리의 수, 스트라이크의 수, 볼의 수를 담은 2차원 배열 baseball이 매개변수로 주어질 때, 
+가능한 답의 개수를 return 하도록 solution 함수를 작성해주세요.
 
 [제한사항]
-nums는 폰켓몬의 종류 번호가 담긴 1차원 배열입니다.
-nums의 길이(N)는 1 이상 10,000 이하의 자연수이며, 항상 짝수로 주어집니다.
-폰켓몬의 종류 번호는 1 이상 200,000 이하의 자연수로 나타냅니다.
-가장 많은 종류의 폰켓몬을 선택하는 방법이 여러 가지인 경우에도, 선택할 수 있는 폰켓몬 종류 개수의 최댓값 하나만 return 하면 됩니다.
+
+질문의 수는 1 이상 100 이하의 자연수입니다.
+baseball의 각 행은 [세 자리의 수, 스트라이크의 수, 볼의 수] 를 담고 있습니다.
 
 */
 
-function solution(numsArr) {}
+function solution(trialsArr) {
+  // [[123, 1, 1], [356, 1, 0], [327, 2, 0], [489, 0, 1]]
+}
+
+// const expected = [3, 3];
+// const args = [3, ['tank', 'kick', 'know', 'wheel', 'land', 'dream', 'mother', 'robot', 'tank']];
+// console.log(
+//   `입력값 ${args}에 대한 solution의 답은 ${expected}이어야 합니다. - 실제 반환값 : ${solution(
+//     ...args,
+//   )}`,
+// );
 
 // ====== 테스트 코드 ======
 const testModule = require("./Programmers_testing_template");
@@ -49,7 +52,7 @@ const testModule = require("./Programmers_testing_template");
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
 
-testCase = [[3, 1, 2, 3]];
+testCase = [[[123, 1, 1], [356, 1, 0], [327, 2, 0], [489, 0, 1]]];
 expected = 2;
 tester(
   `테스트 - ${[...testCase]} should return ${expected}`,
@@ -58,31 +61,6 @@ tester(
     whenFn: solution,
     thenVal: expected,
     assertionFn: (expectedResult, actualResult) =>
-      expectedResult.toString() === actualResult.toString()
-  })
-);
-
-testCase = [[3, 3, 3, 2, 2, 4]];
-expected = 3;
-tester(
-  `테스트 - ${[...testCase]} should return ${expected}`,
-  new TestScenario({
-    givenArr: [...testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) =>
-      expectedResult.toString() === actualResult.toString()
-  })
-);
-testCase = [[3, 3, 3, 2, 2, 2]];
-expected = 2;
-tester(
-  `테스트 - ${[...testCase]} should return ${expected}`,
-  new TestScenario({
-    givenArr: [...testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) =>
-      expectedResult.toString() === actualResult.toString()
+      expectedResult === actualResult
   })
 );
