@@ -1,42 +1,35 @@
 /*
-https://programmers.co.kr/learn/courses/30/lessons/42841?language=javascript
+https://programmers.co.kr/learn/courses/30/lessons/12985?language=javascript
 
-[L2]_숫자_야구.js
+[L2]_예상_대진표.js
 
 [문제 설명]
 
-숫자 야구 게임이란 2명이 서로가 생각한 숫자를 맞추는 게임입니다. 
-각자 서로 다른 1~9까지 3자리 임의의 숫자를 정한 뒤 서로에게 3자리의 숫자를 불러서 결과를 확인합니다. 
-그리고 그 결과를 토대로 상대가 정한 숫자를 예상한 뒤 맞힙니다.
-* 숫자는 맞지만, 위치가 틀렸을 때는 볼
-* 숫자와 위치가 모두 맞을 때는 스트라이크
-* 숫자와 위치가 모두 틀렸을 때는 아웃
+△△ 게임대회가 개최되었습니다. 이 대회는 N명이 참가하고, 토너먼트 형식으로 진행됩니다.
+N명의 참가자는 각각 1부터 N번을 차례대로 배정받습니다.
+그리고, 1번↔2번, 3번↔4번, ... , N-1번↔N번의 참가자끼리 게임을 진행합니다.
+각 게임에서 이긴 사람은 다음 라운드에 진출할 수 있습니다.
 
-예를 들어, 아래의 경우가 있으면
-A : 123
-B : 1스트라이크 1볼.
-A : 356
-B : 1스트라이크 0볼.
-A : 327
-B : 2스트라이크 0볼.
-A : 489
-B : 0스트라이크 1볼.
+이때, 다음 라운드에 진출할 참가자의 번호는 다시 1번부터 N/2번을 차례대로 배정받습니다.
+만약 1번↔2번 끼리 겨루는 게임에서 2번이 승리했다면 다음 라운드에서 1번을 부여받고,
+3번↔4번에서 겨루는 게임에서 3번이 승리했다면 다음 라운드에서 2번을 부여받게 됩니다.
+게임은 최종 한 명이 남을 때까지 진행됩니다.
 
-이때 가능한 답은 324와 328 두 가지입니다.
+이때, 처음 라운드에서 A번을 가진 참가자는
+경쟁자로 생각하는 B번 참가자와 몇 번째 라운드에서 만나는지 궁금해졌습니다.
 
-질문한 세 자리의 수, 스트라이크의 수, 볼의 수를 담은 2차원 배열 baseball이 매개변수로 주어질 때, 
-가능한 답의 개수를 return 하도록 solution 함수를 작성해주세요.
+게임 참가자 수 N, 참가자 번호 A, 경쟁자 번호 B가 함수 solution의 매개변수로 주어질 때,
+처음 라운드에서 A번을 가진 참가자는 경쟁자로 생각하는 B번 참가자와 몇 번째 라운드에서 만나는지
+return 하는 solution 함수를 완성해 주세요.
+
+단, A번 참가자와 B번 참가자는 서로 붙게 되기 전까지 항상 이긴다고 가정합니다.
 
 [제한사항]
-
-질문의 수는 1 이상 100 이하의 자연수입니다.
-baseball의 각 행은 [세 자리의 수, 스트라이크의 수, 볼의 수] 를 담고 있습니다.
-
+N : 21 이상 220 이하인 자연수 (2의 지수 승으로 주어지므로 부전승은 발생하지 않습니다.)
+A, B : N 이하인 자연수 (단, A ≠ B 입니다.)
 */
 
-function solution(trialsArr) {
-  // [[123, 1, 1], [356, 1, 0], [327, 2, 0], [489, 0, 1]]
-}
+function solution(n, a, b) {}
 
 // const expected = [3, 3];
 // const args = [3, ['tank', 'kick', 'know', 'wheel', 'land', 'dream', 'mother', 'robot', 'tank']];
@@ -47,20 +40,19 @@ function solution(trialsArr) {
 // );
 
 // ====== 테스트 코드 ======
-const testModule = require("./Programmers_testing_template");
+const testModule = require('./Programmers_testing_template');
 
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
 
-testCase = [[[123, 1, 1], [356, 1, 0], [327, 2, 0], [489, 0, 1]]];
-expected = 2;
+testCase = [8, 4, 7];
+expected = 3;
 tester(
   `테스트 - ${[...testCase]} should return ${expected}`,
   new TestScenario({
     givenArr: [...testCase],
     whenFn: solution,
     thenVal: expected,
-    assertionFn: (expectedResult, actualResult) =>
-      expectedResult === actualResult
-  })
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
 );
