@@ -1,41 +1,32 @@
 /*
-https://programmers.co.kr/learn/courses/30/lessons/12980?language=javascript
+https://programmers.co.kr/learn/courses/30/lessons/42860?language=javascript
 
-[L2]_점프와_순간_이동.js
+[L2]_조이스틱.js
 
 [문제 설명]
 
-OO 연구소는 한 번에 K 칸을 앞으로 점프하거나, (현재까지 온 거리) x 2 에 해당하는 위치로 순간이동을 할 수 있는
-특수한 기능을 가진 아이언 슈트를 개발하여 판매하고 있습니다.
+조이스틱으로 알파벳 이름을 완성하세요. 맨 처음엔 A로만 이루어져 있습니다.
+ex) 완성해야 하는 이름이 세 글자면 AAA, 네 글자면 AAAA
+조이스틱을 각 방향으로 움직이면 아래와 같습니다.
+▲ - 다음 알파벳
+▼ - 이전 알파벳 (A에서 아래쪽으로 이동하면 Z로)
+◀ - 커서를 왼쪽으로 이동 (첫 번째 위치에서 왼쪽으로 이동하면 마지막 문자에 커서)
+▶ - 커서를 오른쪽으로 이동
 
-이 아이언 슈트는 건전지로 작동되는데, 순간이동을 하면 건전지 사용량이 줄지 않지만,
-앞으로 K 칸을 점프하면 K 만큼의 건전지 사용량이 듭니다. 그러므로 아이언 슈트를 착용하고 이동할 때는
-순간 이동을 하는 것이 더 효율적입니다.
+예를 들어 아래의 방법으로 JAZ를 만들 수 있습니다.
+- 첫 번째 위치에서 조이스틱을 위로 9번 조작하여 J를 완성합니다.
+- 조이스틱을 왼쪽으로 1번 조작하여 커서를 마지막 문자 위치로 이동시킵니다.
+- 마지막 위치에서 조이스틱을 아래로 1번 조작하여 Z를 완성합니다.
+따라서 11번 이동시켜 "JAZ"를 만들 수 있고, 이때가 최소 이동입니다.
 
-아이언 슈트 구매자는 아이언 슈트를 착용하고 거리가 N 만큼 떨어져 있는 장소로 가려고 합니다.
-단, 건전지 사용량을 줄이기 위해 점프로 이동하는 것은 최소로 하려고 합니다.
-
-아이언 슈트 구매자가 이동하려는 거리 N이 주어졌을 때, 사용해야 하는 건전지 사용량의 최솟값을 return하는 solution 함수를 만들어 주세요.
-
-예를 들어 거리가 5만큼 떨어져 있는 장소로 가려고 합니다.
-아이언 슈트를 입고 거리가 5만큼 떨어져 있는 장소로 갈 수 있는 경우의 수는 여러 가지입니다.
-처음 위치 0 에서 5 칸을 앞으로 점프하면 바로 도착하지만, 건전지 사용량이 5 만큼 듭니다.
-처음 위치 0 에서 2 칸을 앞으로 점프한 다음 순간이동 하면
-- (현재까지 온 거리 : 2) x 2에 해당하는 위치로 이동할 수 있으므로 위치 4로 이동합니다.
-- 이때 1 칸을 앞으로 점프하면 도착하므로 건전지 사용량이 3 만큼 듭니다.
-처음 위치 0 에서 1 칸을 앞으로 점프한 다음 순간이동 하면
-- (현재까지 온 거리 : 1) x 2에 해당하는 위치로 이동할 수 있으므로 위치 2로 이동됩니다.
-- 이때 다시 순간이동 하면 (현재까지 온 거리 : 2) x 2 만큼 이동할 수 있으므로 위치 4로 이동합니다.
-- 이때 1 칸을 앞으로 점프하면 도착하므로 건전지 사용량이 2 만큼 듭니다.
-
-위의 3가지 경우 거리가 5만큼 떨어져 있는 장소로 가기 위해서 3번째 경우가 건전지 사용량이 가장 적으므로 답은 2가 됩니다.
+만들고자 하는 이름 name이 매개변수로 주어질 때, 이름에 대해 조이스틱 조작 횟수의 최솟값을 return 하도록 solution 함수를 만드세요.
 
 [제한 사항]
-숫자 N: 1 이상 10억 이하의 자연수
-숫자 K: 1 이상의 자연수
+name은 알파벳 대문자로만 이루어져 있습니다.
+name의 길이는 1 이상 20 이하입니다.
 */
 
-const solution = (num) => {};
+const solution = (nameStr) => {};
 
 // ====== 테스트 코드 ======
 
@@ -52,8 +43,8 @@ const testModule = require('./Programmers_testing_template');
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
 
-testCase = [5];
-expected = 2;
+testCase = ['JEROEN'];
+expected = 56;
 tester(
   `테스트 - ${[...testCase]} should return ${expected}`,
   new TestScenario({
@@ -64,20 +55,8 @@ tester(
   }),
 );
 
-testCase = [6];
-expected = 2;
-tester(
-  `테스트 - ${[...testCase]} should return ${expected}`,
-  new TestScenario({
-    givenArr: [...testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-
-testCase = [5000];
-expected = 5;
+testCase = ['JAN'];
+expected = 23;
 tester(
   `테스트 - ${[...testCase]} should return ${expected}`,
   new TestScenario({
