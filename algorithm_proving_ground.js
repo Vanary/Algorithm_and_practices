@@ -1,40 +1,34 @@
 /*
-https://programmers.co.kr/learn/courses/30/lessons/42860?language=javascript
+https://programmers.co.kr/learn/courses/30/lessons/42885?language=javascript
 
-[L2]_조이스틱.js
+[L2]_구명보트.js
 
 [문제 설명]
+무인도에 갇힌 사람들을 구명보트를 이용하여 구출하려고 합니다. 구명보트는 작아서 한 번에 최대 2명씩 밖에 탈 수 없고, 무게 제한도 있습니다.
 
-조이스틱으로 알파벳 이름을 완성하세요. 맨 처음엔 A로만 이루어져 있습니다.
-ex) 완성해야 하는 이름이 세 글자면 AAA, 네 글자면 AAAA
-조이스틱을 각 방향으로 움직이면 아래와 같습니다.
-▲ - 다음 알파벳
-▼ - 이전 알파벳 (A에서 아래쪽으로 이동하면 Z로)
-◀ - 커서를 왼쪽으로 이동 (첫 번째 위치에서 왼쪽으로 이동하면 마지막 문자에 커서)
-▶ - 커서를 오른쪽으로 이동
+예를 들어, 사람들의 몸무게가 [70kg, 50kg, 80kg, 50kg]이고 구명보트의 무게 제한이 100kg이라면
+2번째 사람과 4번째 사람은 같이 탈 수 있지만 1번째 사람과 3번째 사람의 무게의 합은 150kg이므로 구명보트의 무게 제한을 초과하여 같이 탈 수 없습니다.
 
-예를 들어 아래의 방법으로 JAZ를 만들 수 있습니다.
-- 첫 번째 위치에서 조이스틱을 위로 9번 조작하여 J를 완성합니다.
-- 조이스틱을 왼쪽으로 1번 조작하여 커서를 마지막 문자 위치로 이동시킵니다.
-- 마지막 위치에서 조이스틱을 아래로 1번 조작하여 Z를 완성합니다.
-따라서 11번 이동시켜 "JAZ"를 만들 수 있고, 이때가 최소 이동입니다.
+구명보트를 최대한 적게 사용하여 모든 사람을 구출하려고 합니다.
+사람들의 몸무게를 담은 배열 people과 구명보트의 무게 제한 limit가 매개변수로 주어질 때,
+모든 사람을 구출하기 위해 필요한 구명보트 개수의 최솟값을 return 하도록 solution 함수를 작성해주세요.
 
-만들고자 하는 이름 name이 매개변수로 주어질 때, 이름에 대해 조이스틱 조작 횟수의 최솟값을 return 하도록 solution 함수를 만드세요.
-
-[제한 사항]
-name은 알파벳 대문자로만 이루어져 있습니다.
-name의 길이는 1 이상 20 이하입니다.
+[제한사항]
+무인도에 갇힌 사람은 1명 이상 50,000명 이하입니다.
+각 사람의 몸무게는 40kg 이상 240kg 이하입니다.
+구명보트의 무게 제한은 40kg 이상 240kg 이하입니다.
+구명보트의 무게 제한은 항상 사람들의 몸무게 중 최댓값보다 크게 주어지므로 사람들을 구출할 수 없는 경우는 없습니다.
 */
 
-const solution = (nameStr) => {};
+const solution = (pplArr, limit) => {};
 
 // ====== 테스트 코드 ======
 
 // const expected = [3, 3];
-// const args = [3, ['tank', 'kick', 'know', 'wheel', 'land', 'dream', 'mother', 'robot', 'tank']];
+// const testCase = [3, ['tank', 'kick', 'know', 'wheel', 'land', 'dream', 'mother', 'robot', 'tank']];
 // console.log(
-//   `입력값 ${args}에 대한 solution의 답은 ${expected}이어야 합니다. - 실제 반환값 : ${solution(
-//     ...args,
+//   `입력값 ${testCase}에 대한 solution의 답은 ${expected}이어야 합니다. - 실제 반환값 : ${solution(
+//     ...testCase,
 //   )}`,
 // );
 
@@ -43,8 +37,8 @@ const testModule = require('./Programmers_testing_template');
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
 
-testCase = ['JEROEN'];
-expected = 56;
+testCase = [[70, 50, 80, 50], 100];
+expected = 3;
 tester(
   `테스트 - ${[...testCase]} should return ${expected}`,
   new TestScenario({
@@ -55,8 +49,8 @@ tester(
   }),
 );
 
-testCase = ['JAN'];
-expected = 23;
+testCase = [[70, 80, 50], 100];
+expected = 3;
 tester(
   `테스트 - ${[...testCase]} should return ${expected}`,
   new TestScenario({
