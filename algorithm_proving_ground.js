@@ -1,33 +1,31 @@
 /*
-https://programmers.co.kr/learn/courses/30/lessons/42885?language=javascript
+https://programmers.co.kr/learn/courses/30/lessons/42883?language=javascript
 
 [L2]_구명보트.js
 
 [문제 설명]
-무인도에 갇힌 사람들을 구명보트를 이용하여 구출하려고 합니다. 구명보트는 작아서 한 번에 최대 2명씩 밖에 탈 수 없고, 무게 제한도 있습니다.
+어떤 숫자에서 k개의 수를 제거했을 때 얻을 수 있는 가장 큰 숫자를 구하려 합니다.
+예를 들어, 숫자 1924에서 수 두 개를 제거하면 [19, 12, 14, 92, 94, 24] 를 만들 수 있습니다. 이 중 가장 큰 숫자는 94 입니다.
+문자열 형식으로 숫자 number와 제거할 수의 개수 k가 solution 함수의 매개변수로 주어집니다.
 
-예를 들어, 사람들의 몸무게가 [70kg, 50kg, 80kg, 50kg]이고 구명보트의 무게 제한이 100kg이라면
-2번째 사람과 4번째 사람은 같이 탈 수 있지만 1번째 사람과 3번째 사람의 무게의 합은 150kg이므로 구명보트의 무게 제한을 초과하여 같이 탈 수 없습니다.
+number에서 k 개의 수를 제거했을 때 만들 수 있는 수 중 가장 큰 숫자를 문자열 형태로 return 하도록 solution 함수를 완성하세요.
 
-구명보트를 최대한 적게 사용하여 모든 사람을 구출하려고 합니다.
-사람들의 몸무게를 담은 배열 people과 구명보트의 무게 제한 limit가 매개변수로 주어질 때,
-모든 사람을 구출하기 위해 필요한 구명보트 개수의 최솟값을 return 하도록 solution 함수를 작성해주세요.
-
-[제한사항]
-무인도에 갇힌 사람은 1명 이상 50,000명 이하입니다.
-각 사람의 몸무게는 40kg 이상 240kg 이하입니다.
-구명보트의 무게 제한은 40kg 이상 240kg 이하입니다.
-구명보트의 무게 제한은 항상 사람들의 몸무게 중 최댓값보다 크게 주어지므로 사람들을 구출할 수 없는 경우는 없습니다.
+[제한 조건]
+number는 1자리 이상, 1,000,000자리 이하인 숫자입니다.
+k는 1 이상 number의 자릿수 미만인 자연수입니다.
 */
 
-const solution = (pplArr, limit) => {};
+function solution(number, k) {
+  const answer = '';
+  return answer;
+}
 
 // ====== 테스트 코드 ======
 
 // const expected = [3, 3];
 // const testCase = [3, ['tank', 'kick', 'know', 'wheel', 'land', 'dream', 'mother', 'robot', 'tank']];
 // console.log(
-//   `입력값 ${testCase}에 대한 solution의 답은 ${expected}이어야 합니다. - 실제 반환값 : ${solution(
+//   `입력값 ${JSON.stringify(testCase)}에 대한 solution의 답은 ${JSON.stringify(expected)}이어야 합니다. - 실제 반환값 : ${solution(
 //     ...testCase,
 //   )}`,
 // );
@@ -37,10 +35,10 @@ const testModule = require('./Programmers_testing_template');
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
 
-testCase = [[70, 50, 80, 50], 100];
-expected = 3;
+testCase = ['1924', 2];
+expected = '94';
 tester(
-  `테스트 - ${[...testCase]} should return ${expected}`,
+  `테스트 - ${JSON.stringify(testCase)} should return ${JSON.stringify(expected)}`,
   new TestScenario({
     givenArr: [...testCase],
     whenFn: solution,
@@ -49,10 +47,22 @@ tester(
   }),
 );
 
-testCase = [[70, 80, 50], 100];
-expected = 3;
+testCase = ['1231234', 3];
+expected = '3234';
 tester(
-  `테스트 - ${[...testCase]} should return ${expected}`,
+  `테스트 - ${JSON.stringify(testCase)} should return ${JSON.stringify(expected)}`,
+  new TestScenario({
+    givenArr: [...testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+
+testCase = ['4177252841', 4];
+expected = '775841';
+tester(
+  `테스트 - ${JSON.stringify(testCase)} should return ${JSON.stringify(expected)}`,
   new TestScenario({
     givenArr: [...testCase],
     whenFn: solution,
