@@ -1,22 +1,34 @@
 /*
-https://programmers.co.kr/learn/courses/30/lessons/42883?language=javascript
+https://programmers.co.kr/learn/courses/30/lessons/49993?language=javascript
 
-[L2]_구명보트.js
+[L2]_스킬트리.js
 
 [문제 설명]
-어떤 숫자에서 k개의 수를 제거했을 때 얻을 수 있는 가장 큰 숫자를 구하려 합니다.
-예를 들어, 숫자 1924에서 수 두 개를 제거하면 [19, 12, 14, 92, 94, 24] 를 만들 수 있습니다. 이 중 가장 큰 숫자는 94 입니다.
-문자열 형식으로 숫자 number와 제거할 수의 개수 k가 solution 함수의 매개변수로 주어집니다.
+선행 스킬이란 어떤 스킬을 배우기 전에 먼저 배워야 하는 스킬을 뜻합니다.
 
-number에서 k 개의 수를 제거했을 때 만들 수 있는 수 중 가장 큰 숫자를 문자열 형태로 return 하도록 solution 함수를 완성하세요.
+예를 들어 선행 스킬 순서가 스파크 → 라이트닝 볼트 → 썬더일때, 썬더를 배우려면 먼저 라이트닝 볼트를 배워야 하고,
+라이트닝 볼트를 배우려면 먼저 스파크를 배워야 합니다.
+
+위 순서에 없는 다른 스킬(힐링 등)은 순서에 상관없이 배울 수 있습니다.
+따라서 스파크 → 힐링 → 라이트닝 볼트 → 썬더와 같은 스킬트리는 가능하지만,
+썬더 → 스파크나 라이트닝 볼트 → 스파크 → 힐링 → 썬더와 같은 스킬트리는 불가능합니다.
+
+선행 스킬 순서 skill과 유저들이 만든 스킬트리1를 담은 배열 skill_trees가 매개변수로 주어질 때,
+가능한 스킬트리 개수를 return 하는 solution 함수를 작성해주세요.
 
 [제한 조건]
-number는 1자리 이상, 1,000,000자리 이하인 숫자입니다.
-k는 1 이상 number의 자릿수 미만인 자연수입니다.
+스킬은 알파벳 대문자로 표기하며, 모든 문자열은 알파벳 대문자로만 이루어져 있습니다.
+스킬 순서와 스킬트리는 문자열로 표기합니다.
+예를 들어, C → B → D 라면 CBD로 표기합니다
+선행 스킬 순서 skill의 길이는 2 이상 26 이하이며, 스킬은 중복해 주어지지 않습니다.
+skill_trees는 길이 1 이상 20 이하인 배열입니다.
+skill_trees의 원소는 스킬을 나타내는 문자열입니다.
+skill_trees의 원소는 길이가 2 이상 26 이하인 문자열이며, 스킬이 중복해 주어지지 않습니다.
+
 */
 
-function solution(number, k) {
-  const answer = '';
+function solution(skill, skill_trees) {
+  const answer = 0;
   return answer;
 }
 
@@ -35,32 +47,8 @@ const testModule = require('./Programmers_testing_template');
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
 
-testCase = ['1924', 2];
-expected = '94';
-tester(
-  `테스트 - ${JSON.stringify(testCase)} should return ${JSON.stringify(expected)}`,
-  new TestScenario({
-    givenArr: [...testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-
-testCase = ['1231234', 3];
-expected = '3234';
-tester(
-  `테스트 - ${JSON.stringify(testCase)} should return ${JSON.stringify(expected)}`,
-  new TestScenario({
-    givenArr: [...testCase],
-    whenFn: solution,
-    thenVal: expected,
-    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
-  }),
-);
-
-testCase = ['4177252841', 4];
-expected = '775841';
+testCase = ['CBD', ['BACDE', 'CBADF', 'AECB', 'BDA']];
+expected = 2;
 tester(
   `테스트 - ${JSON.stringify(testCase)} should return ${JSON.stringify(expected)}`,
   new TestScenario({
