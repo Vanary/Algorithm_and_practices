@@ -1,41 +1,32 @@
 /*
-https://programmers.co.kr/learn/courses/30/lessons/49993?language=javascript
+https://programmers.co.kr/learn/courses/30/lessons/12927?language=javascript
 
-[L2]_스킬트리.js
+[L3]_야근_지수.js
 
 [문제 설명]
-선행 스킬이란 어떤 스킬을 배우기 전에 먼저 배워야 하는 스킬을 뜻합니다.
+회사원 Demi는 가끔은 야근을 하는데요, 야근을 하면 야근 피로도가 쌓입니다.
+야근 피로도는 야근을 시작한 시점에서 남은 일의 작업량을 제곱하여 더한 값입니다.
 
-예를 들어 선행 스킬 순서가 스파크 → 라이트닝 볼트 → 썬더일때, 썬더를 배우려면 먼저 라이트닝 볼트를 배워야 하고,
-라이트닝 볼트를 배우려면 먼저 스파크를 배워야 합니다.
+Demi는 N시간 동안 야근 피로도를 최소화하도록 일할 겁니다.
+Demi가 1시간 동안 작업량 1만큼을 처리할 수 있다고 할 때,
+퇴근까지 남은 N 시간과 각 일에 대한 작업량 works에 대해 야근 피로도를 최소화한 값을 리턴하는 함수 solution을 완성해주세요.
 
-위 순서에 없는 다른 스킬(힐링 등)은 순서에 상관없이 배울 수 있습니다.
-따라서 스파크 → 힐링 → 라이트닝 볼트 → 썬더와 같은 스킬트리는 가능하지만,
-썬더 → 스파크나 라이트닝 볼트 → 스파크 → 힐링 → 썬더와 같은 스킬트리는 불가능합니다.
-
-선행 스킬 순서 skill과 유저들이 만든 스킬트리1를 담은 배열 skill_trees가 매개변수로 주어질 때,
-가능한 스킬트리 개수를 return 하는 solution 함수를 작성해주세요.
-
-[제한 조건]
-스킬은 알파벳 대문자로 표기하며, 모든 문자열은 알파벳 대문자로만 이루어져 있습니다.
-스킬 순서와 스킬트리는 문자열로 표기합니다.
-예를 들어, C → B → D 라면 CBD로 표기합니다
-선행 스킬 순서 skill의 길이는 2 이상 26 이하이며, 스킬은 중복해 주어지지 않습니다.
-skill_trees는 길이 1 이상 20 이하인 배열입니다.
-skill_trees의 원소는 스킬을 나타내는 문자열입니다.
-skill_trees의 원소는 길이가 2 이상 26 이하인 문자열이며, 스킬이 중복해 주어지지 않습니다.
+[제한 사항]
+works는 길이 1 이상, 20,000 이하인 배열입니다.
+works의 원소는 50000 이하인 자연수입니다.
+n은 1,000,000 이하인 자연수입니다.
 
 */
 
-function solution(skill, skill_trees) {
+function solution(n, works) {
   const answer = 0;
   return answer;
 }
 
 // ====== 테스트 코드 ======
 
-// const expected = [3, 3];
 // const testCase = [3, ['tank', 'kick', 'know', 'wheel', 'land', 'dream', 'mother', 'robot', 'tank']];
+// const expected = [3, 3];
 // console.log(
 //   `입력값 ${JSON.stringify(testCase)}에 대한 solution의 답은 ${JSON.stringify(expected)}이어야 합니다. - 실제 반환값 : ${solution(
 //     ...testCase,
@@ -47,8 +38,32 @@ const testModule = require('./Programmers_testing_template');
 const tester = testModule.fn_test;
 const TestScenario = testModule.Class_TestScenario;
 
-testCase = ['CBD', ['BACDE', 'CBADF', 'AECB', 'BDA']];
-expected = 2;
+testCase = [4, [4, 3, 3]];
+expected = 12;
+tester(
+  `테스트 - ${JSON.stringify(testCase)} should return ${JSON.stringify(expected)}`,
+  new TestScenario({
+    givenArr: [...testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+
+testCase = [1, [2, 1, 2]];
+expected = 6;
+tester(
+  `테스트 - ${JSON.stringify(testCase)} should return ${JSON.stringify(expected)}`,
+  new TestScenario({
+    givenArr: [...testCase],
+    whenFn: solution,
+    thenVal: expected,
+    assertionFn: (expectedResult, actualResult) => expectedResult === actualResult,
+  }),
+);
+
+testCase = [3, [1, 1]];
+expected = 0;
 tester(
   `테스트 - ${JSON.stringify(testCase)} should return ${JSON.stringify(expected)}`,
   new TestScenario({
